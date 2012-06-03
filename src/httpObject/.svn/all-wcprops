@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/studentsvn/tfe_EPL-2011-058/!svn/ver/612/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject
+END
+Post.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Post.java
+END
+HttpMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/HttpMessage.java
+END
+Request.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Request.java
+END
+RequestInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/RequestInterface.java
+END
+ResponseInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/ResponseInterface.java
+END
+Response.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Response.java
+END

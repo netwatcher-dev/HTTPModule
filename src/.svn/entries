@@ -1,0 +1,67 @@
+10
+
+dir
+658
+https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058/src/module/ModuleHTTP_v2/pseudoProxy_v2/src
+https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058
+
+
+
+2012-05-28T07:31:59.128750Z
+641
+benjamin.vermeulen
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f30cfedb-9f81-47fe-b1ee-1f3b12a03155
+
+config
+dir
+
+decision
+dir
+
+demultiplexer
+dir
+
+exception
+dir
+
+httpObject
+dir
+
+module
+dir
+
+packet
+dir
+
+parserHTML
+dir
+
+profil_ff
+dir
+
+pseudoproxy
+dir
+
+reconstitution
+dir
+
+test
+dir
+
+utils
+dir
+
