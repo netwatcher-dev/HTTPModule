@@ -57,26 +57,7 @@ public class Post extends HttpMessage
     
     
     public void setTarget(String target)
-    {
-        
-//        if(toProxy) // Through a proxy, so host in target
-//        {
-//            try 
-//            {
-//                URL u = new URL(target);
-//                this.target = u.getFile();
-//                this.params.put(HOST, u.getHost());
-//            } 
-//            catch (MalformedURLException ex) 
-//            {
-//                this.target = target;
-//            }
-//        }
-//        else
-//        {
-//            this.target = target;
-//        }
-        
+    {   
         try 
         {
             URL u = new URL(target);

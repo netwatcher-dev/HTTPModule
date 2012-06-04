@@ -41,8 +41,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.swing.JOptionPane;
@@ -99,7 +97,8 @@ public class FirefoxProfile {
     
     private Process startFirefoxOnUnknownOS()
     {
-        return startFirefoxOnLinux();
+        JOptionPane.showMessageDialog(null,"OS not supported","OS",JOptionPane.ERROR_MESSAGE);
+        return null;
     }
     
     private String SetUpProfile()

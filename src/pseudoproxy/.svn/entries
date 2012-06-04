@@ -1,14 +1,14 @@
 10
 
 dir
-658
+695
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/pseudoproxy
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058
 
 
 
-2012-05-24T12:36:11.522180Z
-603
+2012-06-02T19:26:50.949557Z
+680
 benjamin.vermeulen
 
 
@@ -28,14 +28,14 @@ f30cfedb-9f81-47fe-b1ee-1f3b12a03155
 
 ClientManager.java
 file
-680
+696
 
 
 
-2012-06-02T19:24:36.000000Z
-b1069d6af5da7dfb98008d5a1787f12d
-2012-06-02T19:26:50.949557Z
-680
+2012-06-04T09:06:51.000000Z
+7ab1a73a939e6418ba8b05a40e5315b9
+2012-06-04T09:09:11.939845Z
+696
 benjamin.vermeulen
 
 
@@ -58,18 +58,18 @@ benjamin.vermeulen
 
 
 
-6948
+6881
 
 Server.java
 file
-680
+696
 
 
 
-2012-06-02T19:25:10.000000Z
-2b1b484e7a614a5ea040928f520cbd70
-2012-06-02T19:26:50.949557Z
-680
+2012-06-04T09:06:26.000000Z
+24fe0e72f3e40d08232255d0b80e731c
+2012-06-04T09:09:11.939845Z
+696
 benjamin.vermeulen
 
 
@@ -92,5 +92,5 @@ benjamin.vermeulen
 
 
 
-2831
+2829
 

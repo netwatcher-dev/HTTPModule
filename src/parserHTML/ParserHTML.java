@@ -127,6 +127,7 @@ public class ParserHTML
         return false;
     }
     
+    @Override
     public String toString()
     {
         return doc.toString();

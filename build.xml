@@ -71,8 +71,18 @@
     nbproject/build-impl.xml file. 
 
     -->
+   
 
-
+<target name="-post-jar">  
+        <jar jarfile="dist/httpmodule-1.0.jar">  
+            <zipfileset src="${dist.jar}" excludes="META-INF/*" />  
+            <zipfileset src="dist/lib/jsoup-1.6.1.jar" excludes="META-INF/*" />  
+            <manifest>  
+                <attribute name="Main-Class" value="module.moduleHTTP"/>  
+            </manifest>  
+        </jar>  
+</target>  
+    
 <target name="package-for-store" depends="jar">
 
         <!-- Change the value of this property to be the name of your JAR,

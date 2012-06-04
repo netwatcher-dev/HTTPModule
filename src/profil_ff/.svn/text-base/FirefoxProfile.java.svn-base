@@ -41,10 +41,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.swing.JOptionPane;
 
 public class FirefoxProfile {
     
@@ -76,7 +75,7 @@ public class FirefoxProfile {
             return java.lang.Runtime.getRuntime().exec(ex);
         } catch (IOException ex1) {
             
-            Logger.getLogger(FirefoxProfile.class.getName()).log(Level.SEVERE, null, ex1);
+            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found","Firefox",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -91,14 +90,15 @@ public class FirefoxProfile {
             return java.lang.Runtime.getRuntime().exec(ex);
         } catch (IOException ex1) {
             
-            Logger.getLogger(FirefoxProfile.class.getName()).log(Level.SEVERE, null, ex1);
+            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found","Firefox",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
     
     private Process startFirefoxOnUnknownOS()
     {
-        return startFirefoxOnLinux();
+        JOptionPane.showMessageDialog(null,"OS not supported","OS",JOptionPane.ERROR_MESSAGE);
+        return null;
     }
     
     private String SetUpProfile()

@@ -171,6 +171,10 @@ public class moduleHTTP
         
         /* Starting Firefox */
         final Process ff_process = new FirefoxProfile().StartFirefox();
+        if(ff_process == null)
+        {
+            System.exit(-1);
+        }
         
         System.out.println("Connected to IP : "+ip_address+", port : "+port_number);
         
@@ -197,7 +201,7 @@ public class moduleHTTP
 			}
 	});
         
-        /* Kill Firefox at the end */
+        /* Kill Mozilla Firefox at the end */
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 ff_process.destroy();

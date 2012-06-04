@@ -126,7 +126,7 @@ public class ClientManager extends Thread
                 }
                 else
                 {
-                    //System.out.println("not a get request");
+                    System.out.println("not a get request");
                 }
             }            
         } 
@@ -183,7 +183,7 @@ public class ClientManager extends Thread
 
                 out.write("HTTP/1.1 404 Not Found\r\n");
                 out.write("Content-Length: "+msg.length()+"\r\n");
-                out.write("Connection: close\r\n"); //TODO si d'autre get dans le flux, peu etre ne pas mettre close
+                out.write("Connection: close\r\n");
                 out.write("Content-Type: text/html; charset=iso-8859-1\r\n");
 
                 out.write("\r\n");

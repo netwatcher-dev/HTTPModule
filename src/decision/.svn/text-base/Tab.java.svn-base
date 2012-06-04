@@ -56,7 +56,6 @@ class Tab {
         String str;
         if(reqToCheck.hasDnsHost() == false) /* We don't have the host */
         {
-            /*TODO*/
             str = "";
         }
         else
@@ -84,7 +83,6 @@ class Tab {
         String str;
         if(reqToCheck.hasDnsHost() == false) /* We don't have the host */
         {
-            /*TODO*/
             str = "";
         }
         else

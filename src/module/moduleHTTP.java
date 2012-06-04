@@ -201,7 +201,7 @@ public class moduleHTTP
 			}
 	});
         
-        /* Kill Firefox at the end */
+        /* Kill Mozilla Firefox at the end */
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 ff_process.destroy();
