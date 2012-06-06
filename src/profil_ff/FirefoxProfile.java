@@ -75,7 +75,7 @@ public class FirefoxProfile {
             return java.lang.Runtime.getRuntime().exec(ex);
         } catch (IOException ex1) {
             
-            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found","Firefox",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found ("+ex[0]+")","Firefox",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -90,7 +90,7 @@ public class FirefoxProfile {
             return java.lang.Runtime.getRuntime().exec(ex);
         } catch (IOException ex1) {
             
-            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found","Firefox",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Mozilla Firefox not found ("+ex[0]+")","Firefox",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -101,6 +101,11 @@ public class FirefoxProfile {
         return null;
     }
     
+    
+    /**
+     * This method extracts a user profile in a temporally location in order to launch a personalized firefox.
+     * @return the path of the temp profile
+     */
     private String SetUpProfile()
     {
         InputStream input = FirefoxProfile.class.getResourceAsStream("extension_ff.zip");  

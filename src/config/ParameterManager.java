@@ -43,8 +43,8 @@ import java.util.StringTokenizer;
 
 public class ParameterManager {
     /* Default values*/
-    private static int MAX_MAP_CAPACITY = 200;
-    private static int Min_BODY_SIZE = 50;
+    private static int MAX_MAP_CAPACITY = 200; /* Maximum default map capacity */
+    private static int MIN_BODY_SIZE = 50; /* Minimum size in bytes contained in the body of a HTML page*/
     private static String DEFAULT_IP_EXTRACTION = "127.0.0.1";
     
     private static ParameterManager self;
@@ -95,7 +95,7 @@ public class ParameterManager {
             System.err.println("NumberFormatException: Not an Integer value (minimum_body_character)");
         }
 
-        return Min_BODY_SIZE;
+        return MIN_BODY_SIZE;
     }
     
     public String getIpExtraction()

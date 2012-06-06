@@ -50,7 +50,48 @@ class Tab {
     }
     
     
-    /* 1) */
+    
+    
+    /**
+     * Verify if the new URL is contains in the list of URL of this tab, 
+     * or is the current tab, or has the referer equal to the current URL in the tab.
+     * @param reqToCheck The new URL to display
+     * @return True if the new url is linked, False otherwise
+     */
+    public boolean isLinked(Request reqToCheck)
+    {
+        String str;
+        if(reqToCheck.hasDnsHost() == false) /* We don't have the host */
+        {
+            str = "";
+        }
+        else
+        {
+            if(module.moduleHTTP.redirect_map.containsKey(reqToCheck.getCompleteTarget()))
+                str = module.moduleHTTP.redirect_map.get(reqToCheck.getCompleteTarget());
+            else
+                str = reqToCheck.getCompleteTarget();
+        }
+
+        if(!str.startsWith("http://"))
+            str = "http://"+str;
+           
+        /*Same URL as the current one in this tabulation */
+        if(req.getCompleteTarget().equals(reqToCheck.getCompleteTarget()))
+            return true;
+        
+       
+        if(res.getURL().contains(str))
+            return true;
+        
+        return false;
+    }
+    
+    /**
+     * Verify if the new URL is in a frame in the current tab
+     * @param reqToCheck The new URL to display
+     * @return True if the new url is contained in a frame, False otherwise
+     */
     public boolean isIncluded(Request reqToCheck)
     {
         String str;
@@ -70,37 +111,10 @@ class Tab {
         if(!str.startsWith("http://"))
             str = "http://"+str;
         
-        
         if(res.getInclude().contains(str))
-            return true;      
-        
+           return true; 
+                  
         return false;
     }
-    
-    /* 2) */
-    public boolean isLinked(Request reqToCheck)
-    {
-        String str;
-        if(reqToCheck.hasDnsHost() == false) /* We don't have the host */
-        {
-            str = "";
-        }
-        else
-        {
-            if(module.moduleHTTP.redirect_map.containsKey(reqToCheck.getCompleteTarget()))
-                str = module.moduleHTTP.redirect_map.get(reqToCheck.getCompleteTarget());
-            else
-                str = reqToCheck.getCompleteTarget();
-        }
-            
-        if(!str.startsWith("http://"))
-            str = "http://"+str;
-        
-        if(res.getURL().contains(str))
-            return true;
-     
-        return false;
-    }
-    
     
 }

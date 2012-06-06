@@ -102,7 +102,6 @@ public class HeaderTcp
     
     public boolean isZeroChecksum()
     {
-        //System.out.println("Byte 16 "+bytes[16]+" byte 17 "+bytes[17]);
         if(bytes[16] == 0 && bytes[17] == 0)
             return true;
         

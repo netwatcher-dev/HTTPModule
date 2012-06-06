@@ -68,7 +68,7 @@ public class IA
     public synchronized void addEntry(Request req, Response res)
     {
             
-            
+//            
 //            /*
 //             * PROCESSING TAB MANAGEMENT
 //             */
@@ -95,6 +95,7 @@ public class IA
             if(res.isHTML() && res.getCodeResponse() == 200 && res.isHTMLDocument()  /*&& !res.isEmpty()*/ && res.getSizeInBody() >= minimum_body_character)
             {   
                  
+                System.out.println("recieved "+req.getCompleteTarget());
                 /* Connexion to firefox */
                 try {           
                     mFF = new ManageFF();
@@ -106,25 +107,34 @@ public class IA
                 
                 for(Tab t : listTab)
                 {
+                    /* Check if the current URL is in the blacklist */
                     if(isBlackListed(req))
                     {
                         found = true;
+                        System.out.println("Black "+req.getCompleteTarget());
                         break;
                     }
-                    /* 1) Included , not displayed */
-                    if(t.isIncluded(req)){
+                    
+                    /* Included with a frame, not displayed */
+                    if(t.isIncluded(req))
+                    {
                         found = true;
+                        System.out.println("Include "+req.getCompleteTarget());
                         break;
                     }
-                    /* 2) Refresh a tab */                  
+                    
+                    /* Refresh a tab if the current URL is in the list of URL contained by one tabulation */                  
                     if(t.isLinked(req)) 
                     {
                          mFF.openTab(req.toString(), t.id);                        
                          listTab.add(new Tab(req,res,t.id));
                          listTab.remove(t);
-                         found = true;                   
+                         found = true;     
+                         System.out.println("Refresh "+req.getCompleteTarget());
                          break;              
                     } 
+                    
+                    
                 }
                 if(found == false)
                 {
@@ -132,6 +142,7 @@ public class IA
                     id++;
                     mFF.openTab(req.toString(), id);
                     listTab.add(new Tab(req,res,id));
+                    System.out.println("New tab "+req.getCompleteTarget());
                 }
             }
         
@@ -153,7 +164,7 @@ public class IA
             {   
                 if(req.getCompleteTarget().contains(e))
                 {
-                    System.out.println("Blacklisted: "+req.getCompleteTarget());
+                    //System.out.println("Blacklisted: "+req.getCompleteTarget());
                     return true;
                 }
             }

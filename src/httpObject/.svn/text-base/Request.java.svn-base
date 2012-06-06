@@ -45,6 +45,7 @@ import sun.misc.BASE64Decoder;
 
 public class Request extends HttpMessage  implements RequestInterface
 {
+    private String method;
     private String target;
     private String httpVersion;
     private boolean toProxy;
@@ -57,9 +58,10 @@ public class Request extends HttpMessage  implements RequestInterface
         firstRequest = false;
     }
     
-    public Request(String targ, String ver)
+    public Request(String method, String targ, String ver)
     {
         this();
+        this.method = method;
         this.target = targ;
         this.httpVersion = ver;
     }
@@ -81,41 +83,18 @@ public class Request extends HttpMessage  implements RequestInterface
         
     }
     
-   
-
-    @Override
-    public boolean equals(Object o) 
-    {
-        try{
-            if(o instanceof Request)
-            {
-                Request req = (Request)o;
-                if(req.params.containsKey(HOST) && this.params.containsKey(HOST) && !req.params.get(HOST).equals(this.params.get(HOST)))
-                    return false;
-
-                return req.target.equals(this.target);
-
-            }
-        }
-        catch(Exception ex)
-        {
-            return false;
-        }
-        return false;
+    /**
+     * 
+     * @return the url with the host
+     */
+    public String getCompleteTarget()
+    {        
+        if(this.params.containsKey(HOST))
+            return this.params.get(HOST)+this.target;
+        else
+            return this.target;
     }
-
-    @Override
-    public int hashCode() 
-    {
-        int hash = 5;
-        int targetInt = (this.target != null ? this.target.hashCode() : 0) ;
-        int hostInt = (this.params.containsKey(HOST) ? this.params.get(HOST).hashCode() : 0);
-        hash = 37 * hash + targetInt + hostInt;
-        return hash;
-     
-    }
-    
-    
+  
     public boolean hasAuthorization()
     {
         return this.params.containsKey("Authorization");
@@ -177,7 +156,7 @@ public class Request extends HttpMessage  implements RequestInterface
         {
             try {
                 URL u = new URL(params.get(REFERER));
-                ret = u.getHost();
+                ret = u.toExternalForm();
                 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(Request.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,21 +170,19 @@ public class Request extends HttpMessage  implements RequestInterface
         hasDnsHost = false;
     }
     
-
     
-    
-    /**
-     * 
-     * @return the url with the host/IP
-     */
-    public String getCompleteTarget()
-    {        
-        if(this.params.containsKey(HOST))
-            return this.params.get(HOST)+this.target;
+    public int getContentLength()
+    {
+        if(params.containsKey(ResponseInterface.CONTENT_LENGTH))
+        {
+            return Integer.parseInt(params.get(ResponseInterface.CONTENT_LENGTH));
+        }
         else
-            return this.target;
+        {
+            return -1;
+        }
     }
-
+    
     /**
      * @return the firstRequest
      */
@@ -220,12 +197,7 @@ public class Request extends HttpMessage  implements RequestInterface
         this.firstRequest = firstRequest;
     }
 
-    @Override
-    public String toString() 
-    {
-        return this.getCompleteTarget();
-    }
-
+   
     /**
      * @return the hasDnsHost
      */
@@ -251,6 +223,57 @@ public class Request extends HttpMessage  implements RequestInterface
      */
     public void setHttpVersion(String httpVersion) {
         this.httpVersion = httpVersion;
+    }
+
+    /**
+     * @return the method
+     */
+    public String getMethod() {
+        return method;
+    }
+
+    /**
+     * @param method the method to set
+     */
+    public void setMethod(String method) {
+        this.method = method;
+    }
+    
+    @Override
+    public boolean equals(Object o) 
+    {
+        try{
+            if(o instanceof Request)
+            {
+                Request req = (Request)o;
+                
+                return req.target.equals(this.target);
+
+            }
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return this.getCompleteTarget();
+    }
+
+    
+    @Override
+    public int hashCode() 
+    {
+        int hash = 5;
+        int targetInt = (this.target != null ? this.target.hashCode() : 0) ;
+        /*int hostInt = (this.params.containsKey(HOST) ? this.params.get(HOST).hashCode() : 0);*/
+        hash = 37 * hash + targetInt /*+ hostInt*/;
+        return hash;
+     
     }
     
 }

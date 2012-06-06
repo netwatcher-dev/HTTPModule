@@ -123,7 +123,7 @@ public class Response extends HttpMessage implements ResponseInterface
     public String getNewLocation()
     {
         if(params.containsKey(LOCATION))
-        {
+        {   
             return params.get(LOCATION);
         }
         else
@@ -160,8 +160,8 @@ public class Response extends HttpMessage implements ResponseInterface
                  if(s.contains("#"))
                     s = s.substring(0, s.indexOf('#'));
                  
-                 if(getAssociatedRequest().getCompleteTarget() != null)
-                    urlSet.add(ensureAbsoluteURL(getAssociatedRequest().getCompleteTarget(),s));
+                 
+                 urlSet.add(ensureAbsoluteURL(getAssociatedRequest().getCompleteTarget(),s));
  
              }        
        } 
@@ -179,6 +179,7 @@ public class Response extends HttpMessage implements ResponseInterface
              {
                  if(s.contains("#"))
                     s = s.substring(0, s.indexOf('#'));
+                 
                  
                  frameSet.add(ensureAbsoluteURL(getAssociatedRequest().getCompleteTarget(),s));
              }              

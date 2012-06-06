@@ -48,6 +48,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -87,6 +88,7 @@ public class ClientManager extends Thread
                 if (line == null)
                     break;
                 
+                
                 if (line.equals(""))
                 {
                     manageRequest(request, socket.getOutputStream());
@@ -99,11 +101,12 @@ public class ClientManager extends Thread
                 if(newReq)
                 {
                     newReq = false;
+
                     String result [] = line.split("\\s");
                     
                     if(result.length < 3)
                     {
-                        System.out.println("invalid request");
+                        System.out.println("invalid request ");
                         getReq = false;
                         continue;
                     }
@@ -111,6 +114,16 @@ public class ClientManager extends Thread
                     getReq = result[0].equals("GET");
                     request.setTarget(result[1]);
                     request.setHttpVersion(result[2]);
+                    
+                    if(module.moduleHTTP.redirect_map.containsValue(request.getCompleteTarget()))
+                    {
+                        for(Entry<String,String> s : module.moduleHTTP.redirect_map.entrySet())
+                        {
+                            if(s.getValue().equals(request.getCompleteTarget()))
+                                request.setTarget("http://"+s.getKey());
+                        }  
+                    }
+                    
                 }
                 else if(getReq)
                 {
@@ -126,7 +139,7 @@ public class ClientManager extends Thread
                 }
                 else
                 {
-                    System.out.println("not a get request");
+                    System.out.println("not a get request ");
                 }
             }            
         } 
@@ -154,7 +167,7 @@ public class ClientManager extends Thread
                 }
                 os.flush();
                 os.close();
-                map.remove(request);
+                //map.remove(request);
                 break;
             }
             else

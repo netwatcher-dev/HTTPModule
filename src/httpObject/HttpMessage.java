@@ -57,7 +57,6 @@ public abstract class HttpMessage
      */
     public void addParam(String key, String value)
     {
-        //System.out.println("put : {"+key+"} = {"+value+"}");
         params.put(key, value);
     }
     
@@ -66,8 +65,7 @@ public abstract class HttpMessage
         int i = line.indexOf(':');
         if(i < 1)
         {
-            System.out.println
-            ("(parseParam) not a valid line:"+line);
+            System.out.println("(parseParam) not a valid line:"+line);
         }
         else if(i >= line.length()-1)
             this.addParam(line.substring(0, i).trim(), null);

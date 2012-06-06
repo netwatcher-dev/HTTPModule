@@ -36,7 +36,6 @@ package reconstitution;
 
 import utils.MyReaderV2;
 import decision.IA;
-import httpObject.Post;
 import httpObject.Request;
 import httpObject.Response;
 import packet.IpPacket;
@@ -58,7 +57,6 @@ public class HttpRequestResponse implements Runnable
     private String IPServer;
     private Request request;
     private Response response;
-    private Post post;
     private int max_item_size;
     private IpPacket ip;
     public long thread_inspector;
@@ -82,63 +80,20 @@ public class HttpRequestResponse implements Runnable
     @Override
     public void run() 
     {
-        boolean matched = false;
         /* Working loop */
         while(true)
         {
             thread_inspector = System.currentTimeMillis();
             try
             {
-/*-------------- POST HEADER ------------*/   
-                String s1 = readerRequest.readLine().trim(); 
 
-                Pattern pattern = Pattern.compile("POST\\s(.*)\\s(HTTP/1\\..)");
-                Matcher matcher = pattern.matcher(s1);
 
+                /*-------------- GET/POST HEADER ------------*/
+                Pattern pattern = Pattern.compile("(GET|POST)\\s(.*)\\s(HTTP/1\\..)");
+                Matcher matcher = pattern.matcher(readerRequest.readLine().trim());
                 if(matcher.matches())
                 {
-                    matched = true;
-
-                    int b1;
-                    int marker=0;
-                    StringBuilder str = new StringBuilder();
-
-                    post = new Post(matcher.group(1),matcher.group(2));
-
-                    for(String s;!(s= readerRequest.readLine()).isEmpty();)
-                        post.parseParam(s);
-
-                    if(post.getContentLength() < 0) /* No data */
-                        continue;
-
-                    while(true)
-                    {
-                        b1 = readerRequest.read();                       
-                        str.append((char)b1);
-                        marker += 1;                      
-                        if(marker == post.getContentLength())
-                        {
-                            /* Notification in the TextArea */
-                            module.moduleHTTP.area.append("@ "+post.getHost()+" : ");
-                            module.moduleHTTP.area.append(str.toString());
-                            module.moduleHTTP.area.append("\n---\n");
-                            module.moduleHTTP.area.setCaretPosition(module.moduleHTTP.area.getDocument().getLength());
-                            break;
-                        }
-                    }
-
-                    if(!manageResponse())
-                        System.out.println("Error in manage Response POST");
-                }
-
-/*-------------- GET HEADER ------------*/
-                pattern = Pattern.compile("GET\\s(.*)\\s(HTTP/1\\..)");
-                matcher = pattern.matcher(s1);
-
-                if(matcher.matches())
-                {
-                    matched = true;
-                    request = new Request(matcher.group(1), matcher.group(2));
+                    request = new Request(matcher.group(1),matcher.group(2), matcher.group(3));
                     for(String s;!(s= readerRequest.readLine()).isEmpty();)
                     {
                         request.parseParam(s);
@@ -147,13 +102,36 @@ public class HttpRequestResponse implements Runnable
                     /* Host exists or not? IP if added instead of dns */
                     if(request.getHost().isEmpty())
                         request.setHost(IPServer);
+                    
+                    
+                    if(request.getContentLength() > 0) /* data, case of a POST */
+                    {
+                    
+                        int b1;
+                        int marker=0;
+                        StringBuilder str = new StringBuilder();
 
+                        while(true)
+                        {
+                            b1 = readerRequest.read();                       
+                            str.append((char)b1);
+                            marker += 1;                      
+                            if(marker == request.getContentLength())
+                            {
+                                /* Notification in the TextArea */
+                                module.moduleHTTP.area.append("@ "+request.getHost()+" : ");
+                                module.moduleHTTP.area.append(str.toString());
+                                module.moduleHTTP.area.append("\n---\n");
+                                module.moduleHTTP.area.setCaretPosition(module.moduleHTTP.area.getDocument().getLength());
+                                break;
+                            }
+                        }
+                    }
+                    
                     if(!manageResponse())
                         System.out.println("Error in manage Response GET");
                 }
 
-                if(matched == true)
-                    matched = false;
 
             }
             catch(EOFException eofe)
@@ -173,49 +151,14 @@ public class HttpRequestResponse implements Runnable
         }
     }
 
-    private void Completed()
-    {
-        /* If request == null, it's a Post */
-        if(request == null) 
-            return;
-        
-        /* CODE 301 or 302 Moved Permanently/Temporarily */
-        if((response.getCodeResponse() == 301 || response.getCodeResponse() == 302)&& !response.getNewLocation().isEmpty())
-        {
-            String oldLoc = request.getCompleteTarget();
-            request.setTarget(response.getNewLocation());
-            moduleHTTP.redirect_map.put(request.getCompleteTarget(), oldLoc);
-        }
-        
-        /* Link request in response */
-        response.setRequest(request); 
-        
-        /* Special case for Authorization Basic Login and Password*/
-        if(request.hasAuthorization())
-        {
-            module.moduleHTTP.area.append("@ "+request.getHost()+" : ");
-            module.moduleHTTP.area.append("Authorization basic: "+request.getAuthorization());
-            module.moduleHTTP.area.append("\n---\n");
-            module.moduleHTTP.area.setCaretPosition(module.moduleHTTP.area.getDocument().getLength());
-        }
-        
-        /* MAP IS FULL */
-        while(module.moduleHTTP.time_list.size() >= max_item_size)
-        {
-            module.moduleHTTP.map.remove(module.moduleHTTP.time_list.remove(0));
-        }
-        
-        /* MAP INSERTION */
-        module.moduleHTTP.map.put(request, response); /* Insert in the map */
-        module.moduleHTTP.time_list.add(request); /* Insert in the time line*/
-        
-        if(module.moduleHTTP.waiting_map.containsKey(request))
-            module.moduleHTTP.waiting_map.get(request).eventFound();
-        
-        /* DECISION UNIT */
-        ia.addEntry(request, response);
-    }
     
+    /**
+     * 
+     * @return True if it's OK, False if there is an error
+     * @throws EOFException
+     * @throws InterruptedException
+     * @throws IOException 
+     */
     public boolean manageResponse() throws EOFException, InterruptedException, IOException
     {
         /*-------------- RESPONSE HEADER ------------*/
@@ -224,7 +167,8 @@ public class HttpRequestResponse implements Runnable
             System.out.println("Header reading problem");
             return false;
         }
-
+        
+        
         /*-------------- RESPONSE PAYLOAD ------------*/
         if(!response.isChunked()) /* NOT CHUNKED */
         {
@@ -237,12 +181,58 @@ public class HttpRequestResponse implements Runnable
 
     }
     
+    
+    /**
+     * This method reads the header of an http response and puts it in the response object.
+     * @return True if it's OK, False if there is an error in the header reading.
+     * @throws EOFException
+     * @throws InterruptedException 
+     */
+    private boolean readHeaderResponse() throws EOFException, InterruptedException
+    {
+        String s = readerResponse.readLine().trim();
+                
+        while(s.isEmpty() || !s.matches(".*(HTTP/1\\..)\\s(\\d\\d\\d)(.*)"))  
+           s = readerResponse.readLine().trim();
+
+        Pattern pattern = Pattern.compile(".*(HTTP/1\\..)\\s(\\d\\d\\d)(.*)"); 
+        Matcher matcher = pattern.matcher(s);
+
+        response = new Response();
+        
+        if(matcher.matches())
+        {   
+            response.setCodeResponse(matcher.group(2));
+            response.putRawHeader(matcher.group(1)+" "+matcher.group(2)+" "+matcher.group(3)); /* Begin of header */
+            while(!(s = readerResponse.readLine().trim()).isEmpty()) /* All arguments */
+            {
+                response.parseParam(s);
+                response.putRawHeader(s);
+            }
+            response.putRawHeader(""); /* End of header */ 
+        }
+        else
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Read the chuncked content of an http response.
+     * @return True if it's OK, False if there is an error in the reading.
+     * @throws EOFException
+     * @throws InterruptedException
+     * @throws IOException 
+     */
     private boolean readContentResponse() throws IOException, InterruptedException
     {
         int b, marker = 0;
-        if(response.getContentLength() < 0) /* Nothing to read */     
+        if(response.getContentLength() <= 0) /* Nothing to read */     
+        {
+            Completed();
             return true;
-        
+        }
         while(true)
         {
             b = readerResponse.read();                       
@@ -261,7 +251,13 @@ public class HttpRequestResponse implements Runnable
         }
     }
     
-    private boolean readContentChunkedResponse() throws EOFException, InterruptedException, IOException
+    /**
+     * Read the chuncked content of an http response.
+     * @return True if it's OK, False if there is an error in the reading.
+     * @throws InterruptedException
+     * @throws IOException 
+     */
+    private boolean readContentChunkedResponse() throws InterruptedException, IOException
     {
         int b, marker;
         int totalsize = 0;
@@ -283,10 +279,8 @@ public class HttpRequestResponse implements Runnable
                 else
                 {
                     try{
-                        //System.out.println("Chuncked hex"+size_str.toString());
                         chunkSize = Integer.parseInt(
                             size_str.toString().trim().replaceAll("[\r\n]+", ""), 16);
-                        //System.out.println("Chuncked "+chunkSize);
                         break;
                     }
                     catch(NumberFormatException ex)
@@ -329,46 +323,61 @@ public class HttpRequestResponse implements Runnable
   
     }
     
-    private boolean readHeaderResponse() throws EOFException, InterruptedException
-    {
-        String s = readerResponse.readLine().trim();
-                
-        while(s.isEmpty() || !s.matches(".*(HTTP/1\\..)\\s(\\d\\d\\d)(.*)"))  
-           s = readerResponse.readLine().trim();
-
-        Pattern pattern = Pattern.compile(".*(HTTP/1\\..)\\s(\\d\\d\\d)(.*)"); 
-        Matcher matcher = pattern.matcher(s);
-
-        response = new Response();
-
-        if(matcher.matches())
-        {   
-            response.setCodeResponse(matcher.group(2));
-            response.putRawHeader(matcher.group(1)+" "+matcher.group(2)+" "+matcher.group(3)); /* Begin of header */
-            while(!(s = readerResponse.readLine().trim()).isEmpty()) /* All arguments */
-            {
-                response.parseParam(s);
-                response.putRawHeader(s);
-            }
-            response.putRawHeader(""); /* End of header */ 
-
-        }
-        else
-        {
-            return false;
-        }
-        
-        return true;
-    }
     
     /**
-     * @return the reader
+     * This method is called when a request-response is reading to move to the next step.
+     */
+    private void Completed()
+    {      
+        /* CODE 301 or 302 Moved Permanently/Temporarily */
+        if((response.getCodeResponse() == 301 || response.getCodeResponse() == 302)&& !response.getNewLocation().isEmpty())
+        {
+            String oldLoc = request.getCompleteTarget();
+            request.setTarget(response.getNewLocation());
+            moduleHTTP.redirect_map.put(request.getCompleteTarget(), oldLoc);
+        }
+        
+        /* Link request in response */
+        response.setRequest(request); 
+        
+        /* Special case for Authorization Basic Login and Password*/
+        if(request.hasAuthorization())
+        {
+            module.moduleHTTP.area.append("@ "+request.getHost()+" : ");
+            module.moduleHTTP.area.append("Authorization basic: "+request.getAuthorization());
+            module.moduleHTTP.area.append("\n---\n");
+            module.moduleHTTP.area.setCaretPosition(module.moduleHTTP.area.getDocument().getLength());
+        }
+        
+        /* MAP IS FULL */
+        while(module.moduleHTTP.time_list.size() >= max_item_size)
+        {
+            module.moduleHTTP.map.remove(module.moduleHTTP.time_list.remove(0));
+        }
+        
+        /* MAP INSERTION */
+        module.moduleHTTP.map.put(request, response); /* Insert in the map */
+        module.moduleHTTP.time_list.add(request); /* Insert in the time line*/
+        
+        if(module.moduleHTTP.waiting_map.containsKey(request))
+            module.moduleHTTP.waiting_map.get(request).eventFound();
+        
+        /* TO DECISION UNIT */
+        ia.addEntry(request, response);
+    }
+    
+    
+    /**
+     * @return the request reader
      */
     public MyReaderV2 getReaderRequest()
     {
         return readerRequest;
     }
     
+    /**
+     * @return the response reader
+     */
     public MyReaderV2 getReaderResponse()
     {
         return readerResponse;

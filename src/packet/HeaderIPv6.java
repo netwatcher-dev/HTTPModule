@@ -64,7 +64,7 @@ public class HeaderIPv6 extends IP
 
     @Override
     public int getSizeOfOptionData() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override

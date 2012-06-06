@@ -1,14 +1,14 @@
 10
 
 dir
-695
+706
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/parserHTML
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058
 
 
 
-2012-06-02T19:26:50.949557Z
-680
+2012-06-04T09:09:11.939845Z
+696
 benjamin.vermeulen
 
 
@@ -28,14 +28,14 @@ f30cfedb-9f81-47fe-b1ee-1f3b12a03155
 
 ParserHTML.java
 file
-696
+707
 
 
 
-2012-06-03T19:37:06.000000Z
-97d0d7c12d70e34277a900b832ac0110
-2012-06-04T09:09:11.939845Z
-696
+2012-06-06T20:11:34.000000Z
+edc616a3aeae55c0c4c0ca7d6c977f91
+2012-06-06T21:27:44.903501Z
+707
 benjamin.vermeulen
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-4910
+4744
 

@@ -1,14 +1,14 @@
 10
 
 dir
-695
+706
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject
 https://scm.info.ucl.ac.be/studentsvn/tfe_EPL-2011-058
 
 
 
-2012-06-02T19:26:50.949557Z
-680
+2012-06-04T09:09:11.939845Z
+696
 benjamin.vermeulen
 
 
@@ -28,14 +28,14 @@ f30cfedb-9f81-47fe-b1ee-1f3b12a03155
 
 HttpMessage.java
 file
+707
 
 
 
-
-2012-06-02T19:22:39.000000Z
-798448d9dd2e44ecc2e9861b88b359f5
-2012-06-02T19:26:50.949557Z
-680
+2012-06-06T10:14:15.000000Z
+cdde905dd9ffa7e62a171725a4c30b42
+2012-06-06T21:27:44.903501Z
+707
 benjamin.vermeulen
 
 
@@ -58,19 +58,11 @@ benjamin.vermeulen
 
 
 
-2848
+2772
 
 Post.java
 file
-696
-
-
-
-2012-06-04T09:04:46.000000Z
-3e5421f0f950404eabd99d43a91e07bd
-2012-06-04T09:09:11.939845Z
-696
-benjamin.vermeulen
+708
 
 
 
@@ -90,20 +82,18 @@ benjamin.vermeulen
 
 
 
-
-
-3199
+deleted
 
 Request.java
 file
-696
+707
 
 
 
-2012-06-04T09:04:58.000000Z
-39904e25ac472c5eabf842199d1da8d9
-2012-06-04T09:09:11.939845Z
-696
+2012-06-06T19:21:32.000000Z
+a527fcb9c2a4595498175d4c574a140d
+2012-06-06T21:27:44.903501Z
+707
 benjamin.vermeulen
 
 
@@ -126,7 +116,7 @@ benjamin.vermeulen
 
 
 
-6521
+6963
 
 RequestInterface.java
 file
@@ -134,7 +124,7 @@ file
 
 
 
-2012-06-02T19:22:56.000000Z
+2012-06-06T21:21:35.000000Z
 2b11a1cdeff2a64e94f4624e7b249156
 2012-06-02T19:26:50.949557Z
 680
@@ -164,14 +154,14 @@ benjamin.vermeulen
 
 Response.java
 file
+707
 
 
 
-
-2012-06-02T19:23:00.000000Z
-fbea64ea5d6104a76eb5e90fb6f1da8e
-2012-06-02T19:26:50.949557Z
-680
+2012-06-06T16:55:35.000000Z
+9609e7c311a4300021fc8093b85e768e
+2012-06-06T21:27:44.903501Z
+707
 benjamin.vermeulen
 
 
@@ -194,7 +184,7 @@ benjamin.vermeulen
 
 
 
-10540
+10504
 
 ResponseInterface.java
 file
@@ -202,7 +192,7 @@ file
 
 
 
-2012-06-02T19:23:09.000000Z
+2012-06-06T21:21:33.000000Z
 54aeffaa227bc131b8859499235d8e61
 2012-06-02T19:26:50.949557Z
 680

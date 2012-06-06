@@ -7,7 +7,7 @@ IpPacket.java
 K 25
 svn:wc:ra_dav:version-url
 V 106
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/IpPacket.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/IpPacket.java
 END
 IP.java
 K 25
@@ -19,13 +19,13 @@ HeaderTcp.java
 K 25
 svn:wc:ra_dav:version-url
 V 107
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/HeaderTcp.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/HeaderTcp.java
 END
 HeaderIPv6.java
 K 25
 svn:wc:ra_dav:version-url
 V 108
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/HeaderIPv6.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/packet/HeaderIPv6.java
 END
 HeaderIPv4.java
 K 25

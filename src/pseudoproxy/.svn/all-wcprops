@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 97
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/pseudoproxy
+/studentsvn/tfe_EPL-2011-058/!svn/ver/696/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/pseudoproxy
 END
 Server.java
 K 25
@@ -13,5 +13,5 @@ ClientManager.java
 K 25
 svn:wc:ra_dav:version-url
 V 116
-/studentsvn/tfe_EPL-2011-058/!svn/ver/696/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/pseudoproxy/ClientManager.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/pseudoproxy/ClientManager.java
 END

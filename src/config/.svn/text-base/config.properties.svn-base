@@ -5,4 +5,4 @@ max_number_of_items_in_the_map=200
 #The minimum number of characters needed in the <body></body> to consider that is an interessant web page
 minimum_body_character=200
 #If one of these strings is present in an URL, this one will not be send to the browser
-blacklist=static.ak.fbcdn.net;adclick.;platform.twitter.com;api.facebook.com;facebook.com/plugins;facebook.com/widgets;doubleclick.net;addthis.com;sharethis.com;pro.tweetmeme.com;widget.achetezfacile.com
+blacklist=static.ak.fbcdn.net;adclick.;platform.twitter.com;api.facebook.com;facebook.com/plugins;facebook.com/widgets;doubleclick.net;addthis.com;sharethis.com;pro.tweetmeme.com;widget.achetezfacile.com;optimized-by.

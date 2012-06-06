@@ -132,24 +132,8 @@ public class moduleHTTP
             }
             
         }
-//            if(args.length > 1)
-//            {
-//                ip_address = args[0];
-//                try{
-//                    port_number = Integer.parseInt(args[1]);
-//                    if(port_number < 0 || port_number > 65535)
-//                    {
-//                       System.out.println("Usage: port number has to be in the range 1..65535");
-//                       return; 
-//                    }
-//                }catch(NumberFormatException e)
-//                {
-//                    System.out.println("Usage: the argument has to be a port number");
-//                    return;
-//                }
-//            }
-        
-        
+
+               
         
         
         /* Information treatment */

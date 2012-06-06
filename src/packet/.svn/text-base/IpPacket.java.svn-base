@@ -61,10 +61,12 @@ public class IpPacket
     }
     
     /**
-     * 
-     * @return readPacket returns a array of byte correspondig to the payload
-     * of TCP
-     * @throws IOException 
+     * This method reads a packet coming from the extractor system. 
+     * Only IPv4/v6 and TCP protocols are accepted. 
+     * The payload of TCP is extracted at the end.
+     * @return true if the packet is correctly readed, false otherwise 
+     * @throws IOException
+     * @throws SyncException 
      */
     public boolean readPacket() throws IOException, SyncException
     { 
@@ -130,7 +132,14 @@ public class IpPacket
         
     }
     
-    
+    /**
+     * 
+     * @param bytes     readed bytes are placed here.
+     * @param start     starting index in the array of readed bytes
+     * @param size      number of element to read
+     * @return          readed bytes.
+     * @throws IOException 
+     */
     public byte[] read(byte[] bytes,int start, int size) throws IOException
     {
         int off,off_bis;
@@ -150,6 +159,11 @@ public class IpPacket
         return bytes;
     }
     
+    /**
+     * This method skips a fixed number of bytes from the socket.
+     * @param size     number of bytes to skip.
+     * @throws IOException 
+     */
     public void skip(int size) throws IOException
     {
         long off, off_bis;
@@ -166,6 +180,7 @@ public class IpPacket
             off += off_bis;
         }
     }
+    
     
     public IP getHeaderIP()
     {

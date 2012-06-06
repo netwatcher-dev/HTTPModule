@@ -60,9 +60,9 @@ public class ParserHTML
         List<String> l = new LinkedList();
         
         Elements links = doc.select("a");
-        for(Element e : links)           
+        for(Element e : links)
             l.add(e.attr("href"));
-        
+
         /* <area> </area> */
         links = doc.select("area");
         for(Element e : links)          
@@ -86,11 +86,7 @@ public class ParserHTML
         for(Element e : frame)
             l.add(e.attr("src"));
         
-        /*<div data-iframesrc="">*/
-        frame = doc.select("div");
         
-        for(Element e : frame)
-            l.add(e.attr("data-iframesrc"));
         
         return l;
     }
@@ -127,11 +123,6 @@ public class ParserHTML
         return false;
     }
     
-    @Override
-    public String toString()
-    {
-        return doc.toString();
-    }
     
     public boolean hasEmptyBody()
     {
@@ -162,6 +153,11 @@ public class ParserHTML
         return body.length();
     }
    
+    @Override
+    public String toString()
+    {
+        return doc.toString();
+    }
     
     
 }

@@ -59,6 +59,12 @@ public class ManageFF {
         this("localhost",9999);
     }
     
+    
+    /**
+     * Open a new tab in firefox
+     * @param url URL to open
+     * @param id  ID associted to the new tab
+     */
     public void openTab(String url, int id)
     {       
         try 
@@ -75,6 +81,11 @@ public class ManageFF {
         }
     }
     
+    /**
+     * Remove a tab in firefox
+     * @param id ID of the tab
+     * @throws IOException 
+     */
     public void removeTab(int id) throws IOException
     {
         try 

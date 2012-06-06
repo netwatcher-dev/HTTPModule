@@ -1,25 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 96
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject
-END
-Post.java
-K 25
-svn:wc:ra_dav:version-url
-V 106
-/studentsvn/tfe_EPL-2011-058/!svn/ver/696/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Post.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/696/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject
 END
 HttpMessage.java
 K 25
 svn:wc:ra_dav:version-url
 V 113
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/HttpMessage.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/HttpMessage.java
 END
 Request.java
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/studentsvn/tfe_EPL-2011-058/!svn/ver/696/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Request.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Request.java
 END
 RequestInterface.java
 K 25
@@ -37,5 +31,5 @@ Response.java
 K 25
 svn:wc:ra_dav:version-url
 V 110
-/studentsvn/tfe_EPL-2011-058/!svn/ver/680/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Response.java
+/studentsvn/tfe_EPL-2011-058/!svn/ver/707/src/module/ModuleHTTP_v2/pseudoProxy_v2/src/httpObject/Response.java
 END
