@@ -95,7 +95,7 @@ public class IA
             if(res.isHTML() && res.getCodeResponse() == 200 && res.isHTMLDocument()  /*&& !res.isEmpty()*/ && res.getSizeInBody() >= minimum_body_character)
             {   
                  
-                System.out.println("recieved "+req.getCompleteTarget());
+               
                 /* Connexion to firefox */
                 try {           
                     mFF = new ManageFF();
@@ -111,7 +111,7 @@ public class IA
                     if(isBlackListed(req))
                     {
                         found = true;
-                        System.out.println("Black "+req.getCompleteTarget());
+                        
                         break;
                     }
                     
@@ -119,7 +119,7 @@ public class IA
                     if(t.isIncluded(req))
                     {
                         found = true;
-                        System.out.println("Include "+req.getCompleteTarget());
+                        
                         break;
                     }
                     
@@ -130,7 +130,7 @@ public class IA
                          listTab.add(new Tab(req,res,t.id));
                          listTab.remove(t);
                          found = true;     
-                         System.out.println("Refresh "+req.getCompleteTarget());
+                         
                          break;              
                     } 
                     
@@ -142,7 +142,7 @@ public class IA
                     id++;
                     mFF.openTab(req.toString(), id);
                     listTab.add(new Tab(req,res,id));
-                    System.out.println("New tab "+req.getCompleteTarget());
+                    
                 }
             }
         
