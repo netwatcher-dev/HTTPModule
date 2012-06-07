@@ -75,9 +75,11 @@ public class ManageFF {
             sock.close();
 
         } catch (IOException ex) {
-            System.err.println("IOException :"+ex.getMessage());
+            System.err.println("(manageFF) IOException :"+ex.getMessage());
+            ex.printStackTrace();
         } catch (InterruptedException ex) {
-            System.err.println("InterruptedException :"+ex.getMessage());
+            System.err.println("(manageFF) InterruptedException :"+ex.getMessage());
+            ex.printStackTrace();
         }
     }
     

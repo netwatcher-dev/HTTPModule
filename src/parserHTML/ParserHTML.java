@@ -67,6 +67,10 @@ public class ParserHTML
         links = doc.select("area");
         for(Element e : links)          
             l.add(e.attr("href"));
+        
+        links = doc.select("form");
+        for(Element e : links)          
+            l.add(e.attr("action"));
 
         return l;
     }
