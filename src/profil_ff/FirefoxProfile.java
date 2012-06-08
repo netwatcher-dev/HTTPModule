@@ -82,10 +82,12 @@ public class FirefoxProfile {
     
     private Process startFirefoxOnLinux()
     {
-        String [] ex = new String[3];
+        String [] ex = new String[4];
         ex[0] = "firefox";
-        ex[1] = "-profile";
-        ex[2] = SetUpProfile();
+        ex[1] = "-no-remote";
+        ex[2] = "-profile";
+        ex[3] = SetUpProfile();
+        System.out.println("Path temp profil: "+ex[3]);
         try {
             return java.lang.Runtime.getRuntime().exec(ex);
         } catch (IOException ex1) {
